@@ -1,0 +1,117 @@
+# Ten plguin obsługuje zapis kolorów w postaci HEX w formacie &#rrggbb (np. &#ffffffTekst biały) oraz kolorów domyśnego Minecrafta w formacie &[kolor] (np. &bTekst błękitny)
+
+# Połączenie z bazą danych MYSQL
+database:
+  hostname: ""
+  port:
+  name:
+  user:
+  password: 
+
+command:
+  permission:
+    # Permisja do przeładowania pluginu
+    reload: "kits.reload"
+    # Permisja do otwarcia gui zarzadzania zestawami
+    manage: "kits.manage"
+  message:
+    # Wiadomość po przeładowaniu pluginu
+    reload: "&aPomyślnie przeładowano config!"
+    # Wiadomość w przypadku braku permisjii
+    noperm: "&cNie posiadasz permisji do tej komendy!"
+    # Wiadomość w przypadku gdy odbiór zestawów jest wyłączony
+    disable_kits: "&cKity aktualnie są wyłączone!"
+
+manage:
+  messages:
+    # Wiadomość na chacie dla graczy po zmianie statusu dostępnosci zestawów ([STATUS] - nowy status dostępnosci, [PLAYER] - gracz, który zmienił)
+    change_allows: "&cZestawy zostały [STATUS] &cprzez administratora &4[PLAYER]"
+    # Jak wyświetlać status
+    statusoff: "&cWyłączone ✖"
+    statuson: "&aWłączone ✔"
+    invalid_new_kit_name: "&cPodana nazwa dla zestawu nie moze zostac uzyta!" # Wiadomość wysłana do gracza gdy wprowadzi błędną nazwę dla nwoego zestawu
+    invalid_new_kit_time: "&cPodany czas dla zestawu nie moze zostac uzyty! Uzyj formatu (1d,20min,8h)" # Wiadomość wysłana do gracza gdy wprowadzi błędny czas dla nwoego zestawu
+    invalid_new_kit_perm: "&cPodana permisja dla zestawu nie moze zostac uzyta!" # Wiadomość wysłana do gracza gdy wprowadzi błędną permisje dla nwoego zestawu
+    invalid_new_kit_visu: "&cPodana nazwa nie moze zostac uzyta" # Wiadomość wysłana do gracza gdy wprowadzi błędną nazwę dla zestawu
+    invalid_new_kit_item: "&cPodany przedmiot nie istnieje" # Wiadomość wysłana do gracza gdy wprowadzi błędną nazwę dla przedmiotu
+    create: "&aStworzyles nowy zestaw!" # Wiadomość po utworzeniu nowego zestawu
+    kits_off: "&cOtwieranie zestawów jest wyłączone" # Wiadomoćć wysyłana gdy gracz chce odebrac wyłączony zestaw
+    get_kit: "&aOdebrałeś zestaw: [KIT_NAME]" # Wiadomość wysłana po oderbaniu zestawu ([KIT_NAME] - nazwa zestawu)
+    no_perm: "&7Nie posiadasz permisji do odebrania tego zestawu!" # Wiadomość wysłana gdy gracz nie posiada permisji aby oderbać zestaw
+    cooldown: " &7Zestaw odebrac mozesz za: &c[TIME]" # Wiadomość wysłana gdy gracz musi odczekać przed odbiorem zestawu ([TIME] - czas do odczekania)
+
+# Ustawienia gui odbierania zestawów
+gui:
+  name: "&#6DE3A0O&#6AE591d&#67E782b&#64E972i&#61EB63e&#5EED54r&#5BEF45a&#58F135n&#55F326i&#52F517e &#4FE612z&#4DDF0Fe&#4CD80Ds&#4AD00At&#49C908a&#47C205w&#46BA03ó&#44B300w" # Nazwa dla gui z zestawami
+  glass_color: # Kolor szkieł do ookoła gui
+    first: "light_blue" # pierwszy kolor
+    second: "white" # drugi kolor
+  open:
+    name: "&cZestaw [KIT_NAME]" # Nazwa gui gdy odbieramy danegy zestaw ([KIT_NAME] - nazwa zestawu)
+    noperm: "&cNie posiadasz uprawnień!" # Nazwa przedmiotu gdy gracz nie psoaida uprawnień
+    cooldown: "&eOdebrać możesz za: &7[TIME]" # Nazwa przedmiotu gdy gracz odebrał juz zestaw ([TIME] - czas do odczekania)
+    canopen: "&aKliknij, aby odebrać!" # Nazwa przedmiotu gdy gracz może oderbać zestaw
+    back: "&7Powrót" # Nazwa przedmiotu od powrotu do wyboru zetsawów
+  kit:
+    name: "&cZestaw [KIT_NAME]" # Nazwa przedmiotu danego zestawu ([KIT_NAME] - nazwa zestawu)
+    lore: # Opisz przedmiotu  zestawu ([HAS_PERMISSION] - daje znak  czy gracz posiada permisję do zestawu, [CAN_RECEIVE] - daje znak czy gracz może odebrać dany zestaw)
+      - " "
+      - " &f► &7Posiadasz permisje: [HAS_PERMISSION]"
+      - " &f► &7Możesz odbrać: [CAN_RECEIVE]"
+      - " "
+      - " &7Kliknij, aby odebrac!"
+
+# Ustawienia gui odbierania zestawów
+mgui:
+  name: "&cPanel zarzadzania zestawami" # Nazwa dla gui zarządzania zestawami
+  availability_title: "&3Zmien dostępność zestawów" # Nazwa dla przedmiotu od zmiany dostępności zestawów
+  new_kit: "&aStwórz nowy zestaw" # Nazwa dla przedmiotu od tworzenia nowego zestawu
+  new_kit_lore: # Lore dla przedmiotu od tworzenia nowych zetsawów
+    - " "
+    - "  &f► &cWpisz &4'CANCEL' &caby zakończyć tworzenie zestawu"
+    - " "
+  clock: "&6Ustaw automatyczne włączenie zestawów" # Nazwa przedmiotu od ustawienia włączenia kitów o danej godzinie w danym dniu
+  info_lore: # Lore przedmiotu od zarządzania danym zestawem
+    - " "
+    - " &c⬛&f◽⬛ &6LPM - &7edytuj zestaw"
+    - " &f⬛&c◽&f⬛ &6ŚPM - &7zablokuj odbior"
+    - " &f⬛◽&c⬛ &6PPM - &7edytuj czas zestawu"
+    - " &f⬛◽&c⬛ &6LPM + SHIFT - &7edytuj slot zestawu"
+    - " &f⬛&c◽&f⬛ &6RPM + SHIFT - &7usun zestaw"
+    - " "
+  sign: # Edytuj wiadomość w linijkach w tabliczce podczas tworzenia nowego zestawu
+    first_line_create_name: "&dWprowadź nazwę"
+    first_line_create_time: "&dWprowadź czas              (Format czasu: 1d - 1 dzien, 1min - 1 minuta, 1h - 1 godzina)"
+    first_line_create_perm: "&dWprowadź permisje"
+    first_line_create_visu: "&dWprowadź wizualną nazwę"
+    first_line_create_item: "&dWprowadź nazwę przedmiotu              np. OAK_BUTTON"
+    second_line: "&ddla nowego zestawu"
+    third_line: "&c&l^^^^^^^"
+  create_name: "&cWybierz slot dla nowego zestawu" # Nazwa dla gui wyboru slotu dla tworzonego zestawu
+  free_slot: "&AWolne miejsce na zestaw" # Nazwa dla przedmiotu wolnego slota dla nowego zestawu
+  edit_kit_name: "&aEdytuj zestaw [KIT_NAME]" # Nazwa dla gui gdzie edytujesz przedmioty dla zestawu ([KIT_NAME] - nazwa zestawu)
+  save: "&AZapisz" # NAzwa przedmiotu od zapisania nowego zestawu
+
+enable_kits: false # Czy kity mają być włączone
+
+# Zestawy
+kits:
+  player:
+    name: "&7Gracz"
+    item: "type=WOODEN_AXE amount=1"
+    permission: "core.kit.player"
+    time: "6h"
+    enable: true
+    slot: 12
+    items:
+      - "type=IRON_PICKAXE amount=1 DIG_SPEED=3 DURABILITY=3"
+  vip:
+    name: "&e&lVIP"
+    item: "type=DIAMOND_HELMET amount=1"
+    permission: "core.kit.vip"
+    time: "24h"
+    enable: true
+    slot: 13
+    items:
+      - "type=DIAMOND_SWORD amount=1 DAMAGE_ALL=5 FIRE_ASPECT=2"
+      - "type=ENCHANTED_GOLDEN_APPLE amount=8"
